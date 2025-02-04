@@ -19,8 +19,8 @@ class CausalAttention(nn.Module):
         b, num_tokens, d_in = x.shape
         
         queries = self.Q_W(x)
-        keys = self.Q_W(x)
-        values = self.Q_W(x)
+        keys = self.K_W(x)
+        values = self.V_W(x)
         
         attention_scores = torch.matmul(queries, keys.transpose(1, 2))
         attention_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf)
